@@ -20,17 +20,17 @@ namespace MiCalculadora
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            Limpiar();
+            Limpiar(); //Llama al método para borrar los datos
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
             double resultado;
 
-            if(this.cmbOperador.Text != null && this.cmbOperador.Text != "")
+            if(this.cmbOperador.Text != null && this.cmbOperador.Text != "")    //Verifica que el operador no esté vácio.
             {
-                resultado = FormCalculadora.Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text);
-                this.lblResultado.Text = resultado.ToString();
+                resultado = FormCalculadora.Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text); //Obtiene el resultado
+                this.lblResultado.Text = resultado.ToString();  //Lo coloca en el Label
             }
             else
             {
@@ -46,17 +46,19 @@ namespace MiCalculadora
         private void btnConvertirABinario_Click(object sender, EventArgs e)
         {
             Numero resultado = new Numero();
-
-            this.lblResultado.Text = resultado.DecimalBinario(this.lblResultado.Text);
+            
+            //Obtiene el resultado y lo coloca en el Label
+            this.lblResultado.Text = resultado.DecimalBinario(this.lblResultado.Text); 
         }
 
         private void btnConvertirADecimal_Click(object sender, EventArgs e)
         {
             Numero resultado = new Numero();
 
-            if(this.lblResultado.Text != null && this.lblResultado.Text != "")
+            if(this.lblResultado.Text != null && this.lblResultado.Text != "") //Verifica que el operador no esté vácio.
             {
-                this.lblResultado.Text = resultado.BinarioDecimal(this.lblResultado.Text);
+                //Obtiene el resultado y lo coloca en el Label
+                this.lblResultado.Text = resultado.BinarioDecimal(this.lblResultado.Text); 
             }
             else
             {
@@ -64,6 +66,9 @@ namespace MiCalculadora
             }
         }
 
+        /// <summary>
+        /// Borra los datos de los TextBox, ComboBox y el Label de la pantalla.
+        /// </summary>
         private void Limpiar()
         {
             this.txtNumero1.Clear();
@@ -72,6 +77,14 @@ namespace MiCalculadora
             this.cmbOperador.Text = "";
         }
 
+        /// <summary>
+        /// Convierte los dos primeros parametros tipo <see cref="string"/> en <see cref="Numero"/> y
+        /// llama al método Operar de la clase <see cref="Calculadora"/> para obtener el resultado.
+        /// </summary>
+        /// <param name="numero1">Primer operando de tipo <see cref="string"/>.</param>
+        /// <param name="numero2">Segundo operando de tipo <see cref="string"/></param>
+        /// <param name="operador">Operador de tipo <see cref="string"/>.</param>
+        /// <returns>Resultado de la operación realizada tipo <see cref="double"/>.</returns>
         private static double Operar(string numero1, string numero2, string operador)
         {
             Numero numero1Obj = new Numero(numero1);
