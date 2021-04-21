@@ -20,7 +20,7 @@ namespace MiCalculadora
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            Limpiar(); //Llama al método para borrar los datos
+            this.Limpiar(); //Llama al método para borrar los datos
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
