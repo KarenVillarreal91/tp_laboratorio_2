@@ -27,15 +27,13 @@ namespace MiCalculadora
         {
             double resultado;
 
-            if(this.cmbOperador.Text != null && this.cmbOperador.Text != "")    //Verifica que el operador no esté vácio.
+            if(this.cmbOperador.Text == null || this.cmbOperador.Text == "")    //Verifica que el operador no esté vácio.
             {
-                resultado = FormCalculadora.Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text); //Obtiene el resultado
-                this.lblResultado.Text = resultado.ToString();  //Lo coloca en el Label
+                this.cmbOperador.Text = " ";
             }
-            else
-            {
-                this.lblResultado.Text = "Elija un operador.";
-            }
+
+            resultado = FormCalculadora.Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text); //Obtiene el resultado
+            this.lblResultado.Text = resultado.ToString();  //Lo coloca en el Label
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)

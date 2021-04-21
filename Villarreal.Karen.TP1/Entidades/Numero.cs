@@ -193,7 +193,7 @@ namespace Entidades
         /// <returns>Resultado de la multiplicación entre los operandos tipo <see cref="Numero"/>.</returns>
         public static double operator *(Numero n1, Numero n2)
         {
-            return n1.numero * n1.numero;
+            return n1.numero * n2.numero;
         }
         #endregion
 
