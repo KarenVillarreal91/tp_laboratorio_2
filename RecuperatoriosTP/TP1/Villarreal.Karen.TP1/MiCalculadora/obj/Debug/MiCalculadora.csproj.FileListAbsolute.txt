@@ -1,0 +1,13 @@
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\bin\Debug\MiCalculadora.exe.config
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\bin\Debug\MiCalculadora.exe
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\bin\Debug\MiCalculadora.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\obj\Debug\MiCalculadora.csprojAssemblyReference.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\obj\Debug\MiCalculadora.Properties.Resources.resources
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\obj\Debug\MiCalculadora.csproj.GenerateResource.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\obj\Debug\MiCalculadora.csproj.CoreCompileInputs.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\obj\Debug\MiCalculadora.exe
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\obj\Debug\MiCalculadora.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\obj\Debug\MiCalculadora.FormCalculadora.resources
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\bin\Debug\Entidades.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\bin\Debug\Entidades.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP1\MiCalculadora\obj\Debug\MiCalculadora.csproj.CopyComplete
