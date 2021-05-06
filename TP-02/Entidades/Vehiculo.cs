@@ -15,7 +15,7 @@ namespace Entidades
         {
             Chevrolet, Ford, Renault, Toyota, BMW, Honda, HarleyDavidson
         }
-        protected enum ETamanio
+        public enum ETamanio
         {
             Chico, Mediano, Grande
         }
