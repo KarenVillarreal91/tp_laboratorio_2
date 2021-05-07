@@ -10,20 +10,27 @@ namespace Entidades
 {
     public class Sedan : Vehiculo
     {
-        private ETipo tipo;
+        private ETipo tipo; //Agregado private al atributo
         public enum ETipo { CuatroPuertas, CincoPuertas }
 
         /// <summary>
         /// Por defecto, TIPO será CuatroPuertas
         /// </summary>
-        /// <param name="marca"></param>
-        /// <param name="chasis"></param>
-        /// <param name="color"></param>
+        /// <param name="marca">Marca a asignar.</param>
+        /// <param name="chasis">Chasis a asignar.</param>
+        /// <param name="color">Color a asignar.</param>
         public Sedan(EMarca marca, string chasis, ConsoleColor color)
-            : this(marca, chasis, color, ETipo.CuatroPuertas)
+            : this(marca, chasis, color, ETipo.CuatroPuertas) //Llama a la sobrecarga y asigna .CuatroPuertas
         { }
-        public Sedan(EMarca marca, string chasis, ConsoleColor color, ETipo tipo)
-            : base(chasis, marca, color)
+        /// <summary>
+        /// Constructor sobrecargado con el parametro ETipo
+        /// </summary>
+        /// <param name="marca">Marca a asignar.</param>
+        /// <param name="chasis">Chasis a asignar.</param>
+        /// <param name="color">Color a asignar.</param>
+        /// <param name="tipo">Tipo a asignar.</param>
+        public Sedan(EMarca marca, string chasis, ConsoleColor color, ETipo tipo) //Contructor creado con parametro agregado ETipo
+            : base(chasis, marca, color) //Llamada al contructor base
         {
             this.tipo = tipo;
         }
@@ -31,26 +38,30 @@ namespace Entidades
         /// <summary>
         /// Sedan son 'Mediano'
         /// </summary>
-        protected override ETamanio Tamanio
+        protected override ETamanio Tamanio //Arreglado retorno ETamanio
         {
             get
             {
-                return ETamanio.Mediano;
+                return ETamanio.Mediano; //Retorna enumerado .Mediano
             }
         }
 
-        public override sealed string Mostrar()
+        /// <summary>
+        /// Retorna todos los datos del Sedan junto con sus atributos heredados
+        /// </summary>
+        /// <returns>Los datos en un string.</returns>
+        public override string Mostrar() //Eliminado sealed
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SEDAN");
-            sb.AppendLine(base.Mostrar());
-            sb.Append($"TAMAÑO : {this.Tamanio}");
+            sb.AppendLine(base.Mostrar()); //Arreglado base.Mostrar()
+            sb.AppendFormat("TAMAÑO : {0}", this.Tamanio); //Arreglado AppedFormat
             sb.AppendLine("TIPO : " + this.tipo);
             sb.AppendLine("");
             sb.AppendLine("---------------------");
 
-            return sb.ToString();
+            return sb.ToString(); //Arreglado .ToString()
         }
     }
 }
