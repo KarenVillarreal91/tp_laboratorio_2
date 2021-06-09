@@ -1,0 +1,2 @@
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Entidades\obj\Debug\Entidades.csproj.AssemblyReference.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Entidades\obj\Debug\Entidades.csproj.CoreCompileInputs.cache
