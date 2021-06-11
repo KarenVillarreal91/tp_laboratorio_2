@@ -1,0 +1,10 @@
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\bin\Debug\Test.exe.config
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\bin\Debug\Test.exe
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\bin\Debug\Test.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\bin\Debug\Entidades.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\bin\Debug\Entidades.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\obj\Debug\Test.csproj.AssemblyReference.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\obj\Debug\Test.csproj.CopyComplete
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\obj\Debug\Test.exe
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test\obj\Debug\Test.pdb

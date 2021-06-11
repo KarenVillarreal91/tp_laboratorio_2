@@ -1,0 +1,17 @@
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\bin\Debug\FormFabrica.exe.config
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\bin\Debug\FormFabrica.exe
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\bin\Debug\FormFabrica.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.csproj.AssemblyReference.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.Properties.Resources.resources
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.csproj.GenerateResource.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.csproj.CoreCompileInputs.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.exe
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\bin\Debug\Entidades.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\bin\Debug\Entidades.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.frmFabrica.resources
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.csproj.CopyComplete
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.FormPeriferico.resources
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.FormMouse.resources
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.FormAuricular.resources
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\FormFabrica\obj\Debug\FormFabrica.FormTeclado.resources

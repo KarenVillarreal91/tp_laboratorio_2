@@ -12,8 +12,3 @@ public enum ETipoTeclado
 {
     Mecanico, Membrana, Optico
 }
-
-public enum ETipoPeriferico
-{
-    Mouse, Teclado, Auricular
-}

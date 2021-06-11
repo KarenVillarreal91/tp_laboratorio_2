@@ -1,0 +1,19 @@
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Test Unitarios.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Test Unitarios.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\obj\Debug\Test Unitarios.csproj.AssemblyReference.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\obj\Debug\Test Unitarios.csproj.CoreCompileInputs.cache
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\obj\Debug\Test Unitarios.csproj.CopyComplete
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\obj\Debug\Test Unitarios.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\obj\Debug\Test Unitarios.pdb
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Entidades.dll
+D:\Facultad\2do Cuatr\Programación\tp_laboratorio_2\Villarreal.Karen.TP3\Test Unitarios\bin\Debug\Entidades.pdb

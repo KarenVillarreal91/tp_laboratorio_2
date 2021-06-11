@@ -28,87 +28,135 @@ namespace Entidades
         {
             get { return this.perifericos; } 
         }
-
-        public int CantidadMouse
-        {
-            get { return this.ObtenerCantidad(ETipoPeriferico.Mouse); }
-        }
-        public int CantidadTeclado
-        {
-            get { return this.ObtenerCantidad(ETipoPeriferico.Teclado); }
-        }
-        public int CantidadAuricular
-        {
-            get { return this.ObtenerCantidad(ETipoPeriferico.Auricular); }
-        }
         #endregion
 
         #region Métodos
-        public int ObtenerCantidad(ETipoPeriferico periferico)
+        public static bool Escribir(Fabrica f, string path) 
         {
-            int mouse = 0;
-            int teclados = 0;
-            int auriculares = 0;
+            Xml<Fabrica> eF = new Xml<Fabrica>();
 
-            foreach(Periferico item in this.perifericos)
+            return eF.Escribir(path, f);
+        }
+
+        public static Fabrica Leer(string path)
+        {
+            Xml<Fabrica> lF = new Xml<Fabrica>();
+
+            return lF.Leer(path);
+        }
+
+        private int GetIndice(Periferico p)
+        {
+            int indice = -1;
+
+            for (int i = 0; i < this.Perifericos.Count; i++)
             {
-                if(item is Mouse)
+                if (p == this.Perifericos[i])
                 {
-                    mouse++;
-                }
-
-                if(item is Teclado)
-                {
-                    teclados++;
-                }
-
-                if(item is Auricular)
-                {
-                    auriculares++;
+                    indice = i;
+                    break;
                 }
             }
 
-            switch(periferico)
-            {
-                case ETipoPeriferico.Mouse:
-                    return mouse;
-
-                case ETipoPeriferico.Teclado:
-                    return teclados;
-
-                default:
-                    return auriculares;
-            }
+            return indice;
         }
 
         public override string ToString()
         {
             StringBuilder cadena = new StringBuilder();
-
-            cadena.AppendLine($"-- Fábrica de Perifericos {this.nombre} --");
-            cadena.AppendLine($"Total fabricados: {this.perifericos.Count}");
+            
             cadena.AppendLine($"");
-            cadena.AppendLine($"Listado de {typeof(Periferico).Name}");
+            cadena.AppendLine($"-- Fábrica de Perifericos {this.nombre} --");
+            cadena.AppendLine($"Total fabricados: {this.Perifericos.Count}");
+            cadena.AppendLine($"");
+            cadena.AppendLine($"Listado de Perifericos fabricados:");
+            cadena.AppendLine($"");
+            cadena.AppendLine(this.Ficha());
 
-            foreach(Periferico item in this.perifericos)
+            return cadena.ToString();
+        }
+
+        public string Ficha()
+        {
+            StringBuilder cadena = new StringBuilder();
+
+            foreach(Periferico item in this.Perifericos)
             {
-                if(item is Mouse)
-                {
-                    cadena.AppendLine(item.ToString());
-                }
-
-                if(item is Teclado)
-                {
-                    cadena.AppendLine(item.ToString());
-                }
-
-                if(item is Auricular)
-                {
-                    cadena.AppendLine(item.ToString());
-                }
+                cadena.AppendLine(item.ToString());
             }
 
             return cadena.ToString();
+        }
+        #endregion
+
+        #region Sobrecarga de Operadores
+        public static bool operator ==(Fabrica f, Periferico p)
+        {
+            bool rta = false;
+
+            foreach (Periferico item in f.Perifericos)
+            {
+                if(item.Equals(p))
+                {
+                    rta = true;
+                    break;
+                }
+            }
+
+            return rta;
+        }
+        public static bool operator !=(Fabrica f, Periferico p)
+        {
+            return !(f == p);
+        }
+
+        public static bool operator +(Fabrica f, Periferico a)
+        {
+            bool rta = false;
+
+            try
+            {
+                if(f != a)
+                {
+                    f.Perifericos.Add(a);
+                    rta = true;
+                }
+                else
+                {
+                    throw new PerifericosException("Error: El periferico tiene el mismo número de serie que otro en la lista.");
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new PerifericosException(ex);
+            }
+
+            return rta;
+        }
+
+        public static bool operator -(Fabrica f, Periferico a)
+        {
+            int indice = f.GetIndice(a);
+            bool rta = false;
+
+            try 
+            { 
+                if(a.Defectuoso == true)
+                {
+                    f.Perifericos.RemoveAt(indice);
+                    rta = true;
+                }
+                else
+                {
+                    throw new PerifericosException("Error: El periferico tiene estar defectuoso para desecharlo.");
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new PerifericosException(ex);
+            }
+            
+            return rta;
         }
         #endregion
     }
