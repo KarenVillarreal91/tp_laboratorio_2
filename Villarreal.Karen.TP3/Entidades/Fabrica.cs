@@ -197,12 +197,12 @@ namespace Entidades
         /// <returns>True si lo pudo eliminar, False si no.</returns>
         public static bool operator -(Fabrica f, Periferico a)
         {
-            int indice = f.GetIndice(a);
+            int indice = f.GetIndice(a); //Busca el indice
             bool rta = false;
 
             try 
             { 
-                if(a.Defectuoso == true)
+                if(a.Defectuoso == true) //Verifica que esté defectuoso
                 {
                     f.Perifericos.RemoveAt(indice);
                     rta = true;

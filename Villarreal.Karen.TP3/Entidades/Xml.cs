@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.Xml;
+using System.IO;
 
 namespace Entidades
 {
@@ -22,12 +23,19 @@ namespace Entidades
 
             try
             {
-                using (XmlTextWriter writer = new XmlTextWriter(path, Encoding.UTF8))
+                if(Path.GetExtension(path) == ".xml") //Verifica que sea xml
                 {
-                    XmlSerializer ser = new XmlSerializer(typeof(T));
+                    using(XmlTextWriter writer = new XmlTextWriter(path, Encoding.UTF8))
+                    {
+                        XmlSerializer ser = new XmlSerializer(typeof(T));
 
-                    ser.Serialize(writer, datos);
-                    rta = true;
+                        ser.Serialize(writer, datos); //Serializa los datos
+                        rta = true;
+                    }
+                }
+                else
+                {
+                    throw new Exception();
                 }
             }
             catch(Exception ex)
@@ -49,11 +57,18 @@ namespace Entidades
 
             try
             {
-                using(XmlTextReader reader = new XmlTextReader(path))
+                if(Path.GetExtension(path) == ".xml") //Verifica que sea xml
                 {
-                    XmlSerializer ser = new XmlSerializer(typeof(T));
+                    using(XmlTextReader reader = new XmlTextReader(path))
+                    {
+                        XmlSerializer ser = new XmlSerializer(typeof(T));
 
-                    datosObtenidos = (T)ser.Deserialize(reader);
+                        datosObtenidos = (T)ser.Deserialize(reader); //Deserializa en el objeto
+                    }
+                }
+                else
+                {
+                    throw new Exception();
                 }
             }
             catch(Exception ex)

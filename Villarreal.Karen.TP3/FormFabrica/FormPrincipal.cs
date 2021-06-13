@@ -42,6 +42,8 @@ namespace FormFabrica
                 {
                     this.fabrica = Fabrica.Leer(path.FileName); //Lee los datos y los deserializa en la Fabrica.
                     this.Text = "Fábrica " + this.fabrica.nombre; //Cambia el nombre de la ventana de form
+
+                    MessageBox.Show("Se cargó el archivo correctamente!", "Cargado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch(ArchivosException ex)
@@ -186,6 +188,8 @@ namespace FormFabrica
                 if(path.ShowDialog() == DialogResult.OK)
                 {
                     Fabrica.Escribir(this.fabrica, path.FileName); //Escribe los datos
+
+                    MessageBox.Show($"Se guardaron los datos en {path.FileName}", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch(ArchivosException ex)
@@ -205,10 +209,12 @@ namespace FormFabrica
             {
                 this.Text = "Fábrica " + this.txbNombre.Text;
                 this.fabrica.nombre = this.txbNombre.Text;
+
+                MessageBox.Show($"Se cambió el nombre de la fabrica a {this.txbNombre.Text}.", "Modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Ingrese el nombre primero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ingrese el nombre primero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

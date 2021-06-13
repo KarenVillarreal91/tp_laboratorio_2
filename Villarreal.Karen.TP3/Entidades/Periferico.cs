@@ -73,6 +73,7 @@ namespace Entidades
                 if (this.nroSerie == null)
                 {
                     int numero = generadorNroSerie.Next(26);
+                    //Transformo el número generado a una letra y le concateno el número random multiplicado por 100.
                     this.nroSerie = ((char)(((int)'A') + numero)).ToString() + numero * 100;
                 }
 
