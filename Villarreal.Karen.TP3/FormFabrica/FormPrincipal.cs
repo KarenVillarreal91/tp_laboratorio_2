@@ -63,6 +63,9 @@ namespace FormFabrica
             {
                 this.lstVisor.Items.Add(item.ToString());
             }
+
+            this.btnDesechar.Enabled = false;
+            this.cmbDefectuoso.Enabled = false;
         }
 
         /// <summary>
@@ -174,14 +177,16 @@ namespace FormFabrica
         }
 
         /// <summary>
-        /// Abre un dialogo para seleccionar un archivo.
+        /// Abre un dialogo para guardar un archivo.
         /// Escribe los datos de la fábrica en el archivo xml.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnEscribirXml_Click(object sender, EventArgs e)
         {
-            OpenFileDialog path = new OpenFileDialog();
+            SaveFileDialog path = new SaveFileDialog();
+
+            path.Filter = "Archivos XML|*.xml|Todos los archivos|*.*"; //Se agregan filtros
 
             try
             {

@@ -62,7 +62,7 @@ namespace Test
 
             //MUESTRO
             Console.WriteLine(f1);
-            Console.WriteLine($"Toque una tecla para continuar...");
+            Console.WriteLine($"Toque enter para continuar...");
             Console.ReadLine();
             Console.Clear();
 
@@ -72,7 +72,7 @@ namespace Test
 
             Console.WriteLine(f1); //MUESTRO
 
-            Console.WriteLine($"Toque una tecla para continuar...");
+            Console.WriteLine($"Toque enter para continuar...");
             Console.ReadLine();
             Console.Clear();
             try
@@ -94,7 +94,7 @@ namespace Test
 
             Console.WriteLine(f1); //MUESTRO
 
-            Console.WriteLine($"Toque una tecla para continuar...");
+            Console.WriteLine($"Toque enter para continuar...");
             Console.ReadLine();
             Console.Clear();
 
@@ -105,7 +105,7 @@ namespace Test
                     Console.WriteLine($"Se guardaron los datos en XML...");
                 }
 
-                Console.WriteLine($"Toque una tecla para continuar...");
+                Console.WriteLine($"Toque enter para continuar...");
                 Console.ReadLine();
                 Console.Clear();
 

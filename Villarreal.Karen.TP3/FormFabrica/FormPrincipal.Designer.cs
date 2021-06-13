@@ -60,7 +60,7 @@ namespace FormFabrica
             this.btnEscribirXml.Location = new System.Drawing.Point(122, 19);
             this.btnEscribirXml.Name = "btnEscribirXml";
             this.btnEscribirXml.Size = new System.Drawing.Size(108, 27);
-            this.btnEscribirXml.TabIndex = 4;
+            this.btnEscribirXml.TabIndex = 3;
             this.btnEscribirXml.Text = "Guardar";
             this.btnEscribirXml.UseVisualStyleBackColor = true;
             this.btnEscribirXml.Click += new System.EventHandler(this.btnEscribirXml_Click);
@@ -73,7 +73,7 @@ namespace FormFabrica
             this.btnDesechar.Location = new System.Drawing.Point(744, 317);
             this.btnDesechar.Name = "btnDesechar";
             this.btnDesechar.Size = new System.Drawing.Size(108, 27);
-            this.btnDesechar.TabIndex = 7;
+            this.btnDesechar.TabIndex = 8;
             this.btnDesechar.Text = "Desechar";
             this.btnDesechar.UseVisualStyleBackColor = false;
             this.btnDesechar.Click += new System.EventHandler(this.btnDesechar_Click);
@@ -91,7 +91,7 @@ namespace FormFabrica
             this.lstVisor.Location = new System.Drawing.Point(12, 28);
             this.lstVisor.Name = "lstVisor";
             this.lstVisor.Size = new System.Drawing.Size(840, 260);
-            this.lstVisor.TabIndex = 8;
+            this.lstVisor.TabIndex = 1;
             this.lstVisor.SelectedIndexChanged += new System.EventHandler(this.lstVisor_SelectedIndexChanged);
             // 
             // cmbFabricar
@@ -105,7 +105,7 @@ namespace FormFabrica
             this.cmbFabricar.Location = new System.Drawing.Point(290, 324);
             this.cmbFabricar.Name = "cmbFabricar";
             this.cmbFabricar.Size = new System.Drawing.Size(121, 21);
-            this.cmbFabricar.TabIndex = 9;
+            this.cmbFabricar.TabIndex = 4;
             this.cmbFabricar.SelectedIndexChanged += new System.EventHandler(this.cmbFabricar_SelectedIndexChanged);
             // 
             // label1
@@ -139,7 +139,7 @@ namespace FormFabrica
             this.cmbDefectuoso.Location = new System.Drawing.Point(620, 321);
             this.cmbDefectuoso.Name = "cmbDefectuoso";
             this.cmbDefectuoso.Size = new System.Drawing.Size(108, 21);
-            this.cmbDefectuoso.TabIndex = 13;
+            this.cmbDefectuoso.TabIndex = 7;
             this.cmbDefectuoso.SelectedIndexChanged += new System.EventHandler(this.cmbDefectuoso_SelectedIndexChanged);
             // 
             // label3
@@ -170,7 +170,7 @@ namespace FormFabrica
             this.txbNombre.MaxLength = 20;
             this.txbNombre.Name = "txbNombre";
             this.txbNombre.Size = new System.Drawing.Size(121, 20);
-            this.txbNombre.TabIndex = 16;
+            this.txbNombre.TabIndex = 5;
             // 
             // label4
             // 
@@ -187,7 +187,7 @@ namespace FormFabrica
             this.btnCambiarNombre.Location = new System.Drawing.Point(457, 348);
             this.btnCambiarNombre.Name = "btnCambiarNombre";
             this.btnCambiarNombre.Size = new System.Drawing.Size(66, 22);
-            this.btnCambiarNombre.TabIndex = 18;
+            this.btnCambiarNombre.TabIndex = 6;
             this.btnCambiarNombre.Text = "Cambiar";
             this.btnCambiarNombre.UseVisualStyleBackColor = true;
             this.btnCambiarNombre.Click += new System.EventHandler(this.btnCambiarNombre_Click);
