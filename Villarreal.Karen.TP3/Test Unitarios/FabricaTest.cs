@@ -14,7 +14,7 @@ namespace Test_Unitarios
         public void VerificarIgualdadPerifericos_Ok()
         {
             //Arrage
-            Mouse m1 = new Mouse(EColor.Negro, EMarca.Razer, false, 7);
+            Mouse m1 = new Mouse(EColor.Negro, EMarca.Razer, false, 9);
             Mouse m2 = new Mouse(EColor.Blanco, EMarca.Razer, true, 7);
 
             m1.NroSerie = "G506"; //Asigna valores iguales

@@ -46,47 +46,7 @@ namespace Entidades
         }
         #endregion
 
-        #region Sobrecarga de Operadores
-        /// <summary>
-        /// Compara dos Mouse por cantidad de botones y llama a la comparación por perifericos.
-        /// </summary>
-        /// <param name="a">Primer mouse a comparar.</param>
-        /// <param name="b">Segundo mouse a comparar.</param>
-        /// <returns>True si son iguales, false si no.</returns>
-        public static bool operator ==(Mouse a, Mouse b)
-        {
-            return a.cantBotones == b.cantBotones && (Periferico)a == b;
-        }
-
-        /// <summary>
-        /// Compara dos Mouse.
-        /// </summary>
-        /// <param name="a">Primer mouse a comparar.</param>
-        /// <param name="b">Segundo mouse a comparar.</param>
-        /// <returns>True si son diferentes, false si no.</returns>
-        public static bool operator !=(Mouse a, Mouse b)
-        {
-            return !(a == b);
-        }
-        #endregion
-
-        #region Overrides
-        /// <summary>
-        /// Verifica que el parametro sea de tipo Mouse.
-        /// </summary>
-        /// <param name="obj">Mouse a verificar.</param>
-        /// <returns>True si se verifica, false si no.</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is Mouse)
-            {
-                return this == (Mouse)obj;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        #region Override
 
         /// <summary>
         /// Convierte el objeto actual en una lista de toda su información.

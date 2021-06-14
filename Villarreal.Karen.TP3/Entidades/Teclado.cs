@@ -46,47 +46,7 @@ namespace Entidades
         }
         #endregion
 
-        #region Sobrecarga de Operadores
-        /// <summary>
-        /// Compara dos teclados por tipo y llama a la comparación por perifericos.
-        /// </summary>
-        /// <param name="a">Primer teclado a comparar.</param>
-        /// <param name="b">Segundo teclado a comparar.</param>
-        /// <returns>True si son iguales, false si no.</returns>
-        public static bool operator ==(Teclado a, Teclado b)
-        {
-            return a.tipo == b.tipo && (Periferico)a == b;
-        }
-
-        /// <summary>
-        /// Compara dos teclados.
-        /// </summary>
-        /// <param name="a">Primer teclado a comparar.</param>
-        /// <param name="b">Segundo teclado a comparar.</param>
-        /// <returns>True si son diferentes, false si no.</returns>
-        public static bool operator !=(Teclado a, Teclado b)
-        {
-            return !(a == b);
-        }
-        #endregion
-
-        #region Overrides
-        /// <summary>
-        /// Verifica que el parametro sea de tipo Teclado.
-        /// </summary>
-        /// <param name="obj">Teclado a verificar.</param>
-        /// <returns>True si se verifica, false si no.</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is Teclado)
-            {
-                return this == (Teclado)obj;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        #region Override
 
         /// <summary>
         /// Convierte el objeto actual en una lista de toda su información.

@@ -138,7 +138,7 @@ namespace Entidades
 
             foreach (Periferico item in f.Perifericos)
             {
-                if(item.Equals(p))
+                if(item == p)
                 {
                     rta = true;
                     break;
@@ -178,7 +178,7 @@ namespace Entidades
                 }
                 else
                 {
-                    throw new PerifericosException("Error: El periferico tiene el mismo número de serie que otro en la lista.");
+                    throw new PerifericosException("Error: El periferico tiene el mismo número de serie y marca que otro en la lista.");
                 }
             }
             catch(Exception ex)
@@ -209,7 +209,7 @@ namespace Entidades
                 }
                 else
                 {
-                    throw new PerifericosException("Error: El periferico tiene estar defectuoso para desecharlo.");
+                    throw new PerifericosException("Error: El periferico tiene que estar defectuoso para desecharlo.");
                 }
             }
             catch(Exception ex)

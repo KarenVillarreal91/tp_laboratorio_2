@@ -46,47 +46,7 @@ namespace Entidades
         }
         #endregion
 
-        #region Sobrecarga de Operadores
-        /// <summary>
-        /// Compara dos Auriculares si tiene microfono o no y llama a la comparación por perifericos.
-        /// </summary>
-        /// <param name="a">Primer auricular a comparar.</param>
-        /// <param name="b">Segundo auricular a comparar.</param>
-        /// <returns>True si son iguales, false si no.</returns>
-        public static bool operator ==(Auricular a, Auricular b)
-        {
-            return a.conMicrofono == b.conMicrofono && (Periferico)a == b;
-        }
-
-        /// <summary>
-        /// Compara dos Auriculares.
-        /// </summary>
-        /// <param name="a">Primer auricular a comparar.</param>
-        /// <param name="b">Segundo auricular a comparar.</param>
-        /// <returns>True si son diferentes, false si no.</returns>
-        public static bool operator !=(Auricular a, Auricular b)
-        {
-            return !(a == b);
-        }
-        #endregion
-
-        #region Overrides
-        /// <summary>
-        /// Verifica que el parametro sea de tipo Auricular.
-        /// </summary>
-        /// <param name="obj">Auricular a verificar.</param>
-        /// <returns>True si se verifica, false si no.</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is Auricular)
-            {
-                return this == (Auricular)obj;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        #region Override
 
         /// <summary>
         /// Convierte el objeto actual en una lista de toda su información.
