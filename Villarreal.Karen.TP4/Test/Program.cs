@@ -57,7 +57,7 @@ namespace Test
             }
             catch (PerifericosException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.InformarPerifericoRepetido());
             }
 
             //MUESTRO
@@ -75,6 +75,7 @@ namespace Test
             Console.WriteLine($"Toque enter para continuar...");
             Console.ReadLine();
             Console.Clear();
+
             try
             {
                 //ELIMINO M1 - EXITOSO
@@ -89,7 +90,7 @@ namespace Test
             }
             catch(PerifericosException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.InformarPerifericoNoDefectuoso());
             }
 
             Console.WriteLine(f1); //MUESTRO

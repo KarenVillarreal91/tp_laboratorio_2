@@ -13,19 +13,22 @@ using System.Threading;
 
 namespace FormFabrica
 {
-    public delegate void Delegado(PictureBox pB, string path);
 
     public partial class frmFabrica : Form
     {
+        public delegate void Delegado(PictureBox pB, string path);
+
         private Fabrica fabrica;
+        private int desecharFlag = 0;
 
         private SqlConnection conexion;
         private SqlDataAdapter dataA;
 
         private DataTable dataT;
-        private Thread hiloImagen;
-        private Thread hiloGif;
-        public event Delegado eventoImagenGif;
+
+        private Thread hiloPerifericos;
+        private Thread hiloDesechar;
+        public event Delegado eventoImagen;
 
         /// <summary>
         /// Constructor por defecto.
@@ -38,22 +41,29 @@ namespace FormFabrica
             this.fabrica = new Fabrica("Mi fábrica"); //Crea la fabrica
             this.Text = "Fábrica ";
 
-            this.eventoImagenGif += this.MostrarImagenGif;
+            this.eventoImagen += this.MostrarImagen; //Se agrega el manejador al evento
 
-            this.hiloImagen = new Thread(this.EjecutarPerifericos);
+            this.hiloPerifericos = new Thread(this.EjecutarPerifericos); //Se asocia la dirección de memoria del método al hilo
 
-            if(!this.hiloImagen.IsAlive) //Verifica que el hilo esté muerto
+            this.hiloDesechar = new Thread(this.EjecutarDesechar);  //Se asocia la dirección de memoria del método al hilo del gif
+
+            if (!this.hiloPerifericos.IsAlive) //Verifica que el hilo esté muerto
             {
-                this.hiloImagen.Start();
+                this.hiloPerifericos.Start(); //Inicia el hilo de perifericos
             }
 
-            this.conexion = new SqlConnection(Properties.Settings.Default.conexionBD);
-            this.ConfigurarDataAdapter();
-            this.ConfigurarDataTable();
+            if (!this.hiloDesechar.IsAlive) //Verifica que el hilo esté muerto
+            {
+                this.hiloDesechar.Start(); //Inicia el hilo de desechar
+            }
 
-            this.dgvListado.DataSource = this.dataT;
+            this.conexion = new SqlConnection(Properties.Settings.Default.conexionBD); //Se establece la conexión
+            this.ConfigurarDataAdapter(); //Configura el DataAdapter
+            this.ConfigurarDataTable(); //Configura el DataTable
 
-            this.btnDesechar.Enabled = false;
+            this.dgvListado.DataSource = this.dataT; //Se vincula la grilla con el DataTable
+
+            this.btnDesechar.Enabled = false; //Se desabilita el botón de desechar y ComboBox de defectuoso
             this.cmbDefectuoso.Enabled = false;
         }
 
@@ -90,7 +100,7 @@ namespace FormFabrica
                     //Se agrega el periferico creado a la fabrica
                     if (this.fabrica + frm.PerifericoDelForm)
                     {
-                        this.AgregarADataT(frm.PerifericoDelForm);
+                        this.AgregarADataT(frm.PerifericoDelForm); //Se agrega al DataTable
 
                         MessageBox.Show("Se fabricó correctamente!", "Fabricado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -109,36 +119,30 @@ namespace FormFabrica
         /// <param name="e"></param>
         private void btnDesechar_Click(object sender, EventArgs e)
         {
-            int i = this.dgvListado.CurrentRow.Index;
+            int i = this.dgvListado.CurrentRow.Index; //Obtiene el indice de la fila seleccionada
 
-            DataRowView drw = (DataRowView)this.dgvListado.CurrentRow.DataBoundItem;
+            //Obtiene la fila seleccionada de la grilla
+            DataRowView filaActual = (DataRowView)this.dgvListado.CurrentRow.DataBoundItem;
 
             if (i > -1)
             {
                 try
-                {
-                    this.hiloGif = new Thread(new ParameterizedThreadStart(this.EjecutarGifDesechar));  
-                    
+                { 
                     //Se elimina el periferico seleccionado
                     if (this.fabrica - this.fabrica.Perifericos[i])
                     {
-                        this.dataT.Rows.Find(new object[] { drw.Row[2], drw.Row[4] }).Delete();
+                        //Busca la fila en el DataTable que coincida con los atributos de la fila de la grilla y lo elimina
+                        this.dataT.Rows.Find(new object[] { filaActual.Row[2], filaActual.Row[4] }).Delete();
 
-                        this.hiloGif.Start("correcto.gif");
+                        this.desecharFlag = 1;
                         MessageBox.Show("Se desechó correctamente!", "Desechado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch (PerifericosException ex)
                 {
-                    this.hiloGif.Start("error.gif");
+                    this.desecharFlag = 2;
                     MessageBox.Show(ex.InformarPerifericoNoDefectuoso(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-
-            if(this.dgvListado.CurrentRow == null)
-            {
-                this.btnDesechar.Enabled = false;
-                this.cmbDefectuoso.Enabled = false;
             }
         }
 
@@ -149,8 +153,17 @@ namespace FormFabrica
         /// <param name="e"></param>
         private void dgvListado_SelectionChanged(object sender, EventArgs e)
         {
-            this.btnDesechar.Enabled = true;
-            this.cmbDefectuoso.Enabled = true;
+            //Si el listado de la grilla no está vácio habilita el botón y el combobox
+            if (this.dgvListado.CurrentRow != null)
+            {
+                this.btnDesechar.Enabled = true;
+                this.cmbDefectuoso.Enabled = true;
+            }
+            else
+            {
+                this.btnDesechar.Enabled = false;
+                this.cmbDefectuoso.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -161,9 +174,10 @@ namespace FormFabrica
         /// <param name="e"></param>
         private void cmbDefectuoso_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int i = this.dgvListado.CurrentRow.Index;
+            int i = this.dgvListado.CurrentRow.Index; //Obtiene el indice de la fila seleccionada
 
-            DataRowView drw = (DataRowView)this.dgvListado.CurrentRow.DataBoundItem;
+            //Obtiene la fila seleccionada de la grilla
+            DataRowView filaActual = (DataRowView)this.dgvListado.CurrentRow.DataBoundItem;
 
             if (i > -1)
             {
@@ -172,12 +186,17 @@ namespace FormFabrica
                 {
                     this.fabrica.Perifericos[i].Defectuoso = true;
 
-                    this.dataT.Rows.Find(new object[] { drw.Row[2], drw.Row[4] })[5] = true;
+                    //Busca la fila en el DataTable que coincida con los atributos de la fila de la grilla
+                    //y setea en true el atributo Defectuoso
+                    this.dataT.Rows.Find(new object[] { filaActual.Row[2], filaActual.Row[4] })[5] = true;
                 }
                 else
                 {
                     this.fabrica.Perifericos[i].Defectuoso = false;
-                    this.dataT.Rows.Find(new object[] { drw.Row[2], drw.Row[4] })[5] = false;
+
+                    //Busca la fila en el DataTable que coincida con los atributos de la fila de la grilla
+                    //y setea en false el atributo Defectuoso
+                    this.dataT.Rows.Find(new object[] { filaActual.Row[2], filaActual.Row[4] })[5] = false;
                 }
             }
         }
@@ -190,28 +209,34 @@ namespace FormFabrica
         /// <param name="e"></param>
         private void btnLeerXml_Click(object sender, EventArgs e)
         {
-            OpenFileDialog path = new OpenFileDialog();
+            DialogResult rta = MessageBox.Show("Si cargó un periférico anteriormente se borrará.\n¿Está seguro?", "Atención", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-            try
+            if (rta == DialogResult.OK) //Si acepta continua
             {
-                if (path.ShowDialog() == DialogResult.OK)
+                OpenFileDialog path = new OpenFileDialog();
+
+                try
                 {
-                    this.fabrica = Fabrica.Leer(path.FileName); //Lee los datos y los deserializa en la Fabrica.
-                    this.Text = "Fábrica " + this.fabrica.nombre; //Cambia el nombre de la ventana de form
-
-                    this.dataT.Rows.Clear();
-
-                    foreach (Periferico item in this.fabrica.Perifericos)
+                    if (path.ShowDialog() == DialogResult.OK)
                     {
-                        this.AgregarADataT(item);
-                    }
+                        this.fabrica = Fabrica.Leer(path.FileName); //Lee los datos y los deserializa en la Fabrica.
+                        this.Text = "Fábrica " + this.fabrica.nombre; //Cambia el nombre de la ventana de form
 
-                    MessageBox.Show("Se cargó el archivo correctamente!", "Cargado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.dataT.Rows.Clear(); //Limpia el DataTable
+
+                        //Agrega cada periférico de la lista al DataTable
+                        foreach (Periferico item in this.fabrica.Perifericos)
+                        {
+                            this.AgregarADataT(item);
+                        }
+
+                        MessageBox.Show("Se cargó el archivo correctamente!", "Cargado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-            }
-            catch (ArchivosException ex)
-            {
-                MessageBox.Show(ex.InformarArchivoErroneo(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (ArchivosException ex)
+                {
+                    MessageBox.Show(ex.InformarArchivoErroneo(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -262,69 +287,87 @@ namespace FormFabrica
             }
         }
 
+        /// <summary>
+        /// Carga el listado de periféricos desde la base de datos, eliminando la listado cargado anteriormente.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCargarBD_Click(object sender, EventArgs e)
         {
             bool aux;
 
-            try
+            DialogResult rta = MessageBox.Show("Si cargó un periférico anteriormente se borrará.\n¿Está seguro?", "Atención", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if(rta == DialogResult.OK) //Si acepta continua
             {
-                this.dataT.Clear();
-                this.dataA.Fill(this.dataT);
-
-                foreach (DataRow fila in this.dataT.Rows)
+                try
                 {
-                    try
+                    this.fabrica.Perifericos.Clear(); //Borra la lista de la fábrica
+                    this.dataT.Clear(); //Borra el listado del DataTable
+
+                    this.dataA.Fill(this.dataT); //Obtiene el listado de la base de datos
+
+                    //Agrega el listado de DataTable al listado de la fábrica según el tipo de periférico
+                    foreach (DataRow fila in this.dataT.Rows)
                     {
-                        if (fila.RowState != DataRowState.Deleted)
+                        try
                         {
-                            if (fila[0].ToString() == "Auricular")
+                            if (fila.RowState != DataRowState.Deleted) //Verifica que la fila no esté marcada como eliminada
                             {
-                                Auricular aur = new Auricular((EColor)fila[1], (EMarca)fila[2], (bool)fila[3], bool.Parse(fila[6].ToString()));
-
-                                aur.NroSerie = fila[4].ToString();
-                                aur.Defectuoso = (bool)fila[5];
-
-                                aux = this.fabrica + aur;
-                            }
-                            else
-                            {
-                                if (fila[0].ToString() == "Teclado")
+                                if (fila[0].ToString() == "Auricular")
                                 {
-                                    Teclado teclado = new Teclado((EColor)fila[1], (EMarca)fila[2], (bool)fila[3], (ETipoTeclado)fila[7]);
+                                    Auricular aur = new Auricular((EColor)fila[1], (EMarca)fila[2], (bool)fila[3], bool.Parse(fila[6].ToString()));
 
-                                    teclado.NroSerie = fila[4].ToString();
-                                    teclado.Defectuoso = (bool)fila[5];
+                                    aur.NroSerie = fila[4].ToString();
+                                    aur.Defectuoso = (bool)fila[5];
 
-                                    aux = this.fabrica + teclado;
+                                    aux = this.fabrica + aur;
                                 }
                                 else
                                 {
-                                    Mouse mouse = new Mouse((EColor)fila[1], (EMarca)fila[2], (bool)fila[3], (int)fila[8]);
+                                    if (fila[0].ToString() == "Teclado")
+                                    {
+                                        Teclado teclado = new Teclado((EColor)fila[1], (EMarca)fila[2], (bool)fila[3], (ETipoTeclado)fila[7]);
 
-                                    mouse.NroSerie = fila[4].ToString();
-                                    mouse.Defectuoso = (bool)fila[5];
+                                        teclado.NroSerie = fila[4].ToString();
+                                        teclado.Defectuoso = (bool)fila[5];
 
-                                    aux = this.fabrica + mouse;
+                                        aux = this.fabrica + teclado;
+                                    }
+                                    else
+                                    {
+                                        Mouse mouse = new Mouse((EColor)fila[1], (EMarca)fila[2], (bool)fila[3], (int)fila[8]);
+
+                                        mouse.NroSerie = fila[4].ToString();
+                                        mouse.Defectuoso = (bool)fila[5];
+
+                                        aux = this.fabrica + mouse;
+                                    }
                                 }
                             }
                         }
-                    }
-                    catch (PerifericosException)
-                    {
+                        catch (PerifericosException)
+                        {
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
+        /// <summary>
+        /// Guarda/Actualiza la lista de periféricos actual en la base de datos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGuardarBD_Click(object sender, EventArgs e)
         {
             try
             {
-                this.dataA.Update(this.dataT);
+                this.dataA.Update(this.dataT); //Actualiza la base de datos con el listado de DataTable
 
                 MessageBox.Show("Datos sincronizados.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -349,26 +392,23 @@ namespace FormFabrica
             }
             else
             {
-                try
+                if (this.hiloPerifericos.IsAlive) //Verifica que el hilo de perifericos esté vivo 
                 {
-                    if (this.hiloImagen.IsAlive)       
-                    {
-                        this.hiloImagen.Abort();      
-                    }
-
-                    if (this.hiloGif != null)
-                    {
-                        this.hiloGif.Abort();
-                    }
+                    this.hiloPerifericos.Abort(); //Lo aborta
                 }
-                catch (Exception)
-                {
 
+                if (this.hiloDesechar.IsAlive) //Verifica que el hilo de desechar no sea null
+                {
+                    this.hiloDesechar.Abort(); //Lo aborta
                 }
             }
         }
 
         #region Metodos
+        /// <summary>
+        /// Agrega el periférico al DataTable.
+        /// </summary>
+        /// <param name="periferico">Periférico a agregar.</param>
         private void AgregarADataT(Periferico periferico)
         {
             DataRow fila = this.dataT.NewRow();
@@ -380,6 +420,7 @@ namespace FormFabrica
             fila[4] = periferico.NroSerie;
             fila[5] = periferico.Defectuoso;
 
+            //Según el tipo asigna su respectivo atributo
             if (periferico.Tipo == "Auricular")
             {
                 fila[6] = ((Auricular)periferico).conMicrofono.ToString();
@@ -396,9 +437,12 @@ namespace FormFabrica
                 }
             }
 
-            this.dataT.Rows.Add(fila);
+            this.dataT.Rows.Add(fila); //Lo agrega
         }
 
+        /// <summary>
+        /// Configura las columnas del DataTable.
+        /// </summary>
         private void ConfigurarDataTable()
         {
             this.dataT = new DataTable("Perifericos");
@@ -413,9 +457,13 @@ namespace FormFabrica
             this.dataT.Columns.Add("Teclas", typeof(ETipoTeclado));
             this.dataT.Columns.Add("CantBotones", typeof(int));
 
+            //Agrega la marca y el nroSerie como primary key
             this.dataT.PrimaryKey = new DataColumn[] { this.dataT.Columns[2], this.dataT.Columns[4] };
         }
 
+        /// <summary>
+        /// Configura los comandos del DataAdapter.
+        /// </summary>
         private void ConfigurarDataAdapter()
         {
             try
@@ -458,33 +506,71 @@ namespace FormFabrica
             }
         }
 
-        private void EjecutarGifDesechar(object path)
+        /// <summary>
+        /// Cambia el gif de desechar según el parametro.
+        /// </summary>
+        /// <param name="path">Nombre del archivo del gif.</param>
+        private void EjecutarDesechar()
         {
-            if (this.pBBasura.InvokeRequired)
+            do
             {
-                this.eventoImagenGif.Invoke(this.pBBasura, path.ToString());
+                if(this.desecharFlag == 1)
+                {
+                    for (int i = 1; i < 13; i++) //Secuencia de 12 imágenes
+                    {
+                        this.eventoImagen.Invoke(this.pBBasura, $"correcto{i}.png");
+                        Thread.Sleep(80);
+                    }
+                    this.desecharFlag = 0;
+                }
+                else
+                {
+                    if(this.desecharFlag == 2)
+                    {
+                        for (int i = 1; i < 13; i++) //Secuencia de 12 imágenes
+                        {
+                            this.eventoImagen.Invoke(this.pBBasura, $"error{i}.png");
+                            Thread.Sleep(60);
+                        }
+                        this.desecharFlag = 0;
+                    }
+                    else
+                    {
+                        for (int i = 1; i < 10; i++) //Secuencia de 9 imágenes
+                        {
+                            this.eventoImagen.Invoke(this.pBBasura, $"basura{i}.png");
+                            Thread.Sleep(100);
+                        }
+                    }
+                }
 
-                Thread.Sleep(4500);
-                this.eventoImagenGif.Invoke(this.pBBasura, "basura.gif");
-            }
+            }while(true);
         }
 
-        private void MostrarImagenGif(PictureBox pB, string path)
+        /// <summary>
+        /// Cambia la ruta de la imagen/gif del PictureBox.
+        /// </summary>
+        /// <param name="pB">PictureBox a ser cambiado.</param>
+        /// <param name="path">Nombre del archivo de la imagen/gif.</param>
+        private void MostrarImagen(PictureBox pB, string path)
         {
             pB.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + $@"\img\{path}";
         }
 
+        /// <summary>
+        /// Ejecuta una secuencia de tres imagenes que cambian continuamente.
+        /// </summary>
         private void EjecutarPerifericos()
         {
             do
             {
-                this.eventoImagenGif.Invoke(this.pBPerifericos, "mouse.png"); 
+                this.eventoImagen.Invoke(this.pBPerifericos, "mouse.png");  //Invoca al evento
                 Thread.Sleep(2500);
-                this.eventoImagenGif.Invoke(this.pBPerifericos, "teclado.png");
+                this.eventoImagen.Invoke(this.pBPerifericos, "teclado.png");
                 Thread.Sleep(2500);
-                this.eventoImagenGif.Invoke(this.pBPerifericos, "auricular.png");
+                this.eventoImagen.Invoke(this.pBPerifericos, "auricular.png");
                 Thread.Sleep(2500);
-
+           
             } while (true);
         }
 
