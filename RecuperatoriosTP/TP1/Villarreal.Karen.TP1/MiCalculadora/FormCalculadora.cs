@@ -27,18 +27,14 @@ namespace MiCalculadora
         {
             double resultado;
 
-            if(this.cmbOperador.Text == null || this.cmbOperador.Text == "")    //Verifica que el operador no esté vácio.
-            {
-                this.cmbOperador.Text = " ";
-            }
-
-            resultado = FormCalculadora.Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text); //Obtiene el resultado
+            resultado = Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text); //Obtiene el resultado
+            
             this.lblResultado.Text = resultado.ToString();  //Lo coloca en el Label
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void btnConvertirABinario_Click(object sender, EventArgs e)
@@ -53,7 +49,7 @@ namespace MiCalculadora
         {
             Numero resultado = new Numero();
 
-            if(this.lblResultado.Text != null && this.lblResultado.Text != "") //Verifica que el operador no esté vácio.
+            if(this.lblResultado.Text != null && this.lblResultado.Text != "") //Verifica que el resultado no esté vácio.
             {
                 //Obtiene el resultado y lo coloca en el Label
                 this.lblResultado.Text = resultado.BinarioDecimal(this.lblResultado.Text); 
@@ -85,10 +81,14 @@ namespace MiCalculadora
         /// <returns>Resultado de la operación realizada tipo <see cref="double"/>.</returns>
         private static double Operar(string numero1, string numero2, string operador)
         {
+            char operadorChar;
+
             Numero numero1Obj = new Numero(numero1);
             Numero numero2Obj = new Numero(numero2);
 
-            return Calculadora.Operar(numero1Obj, numero2Obj, operador);
+            char.TryParse(operador, out operadorChar);
+
+            return Calculadora.Operar(numero1Obj, numero2Obj, operadorChar);
         }
 
         private void FormCalculadora_Load(object sender, EventArgs e)

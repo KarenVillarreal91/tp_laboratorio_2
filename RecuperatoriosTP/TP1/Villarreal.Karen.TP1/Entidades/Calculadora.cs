@@ -13,14 +13,14 @@ namespace Entidades
         /// </summary>
         /// <param name="num1">Primer operando tipo <see cref="Numero"/>.</param>
         /// <param name="num2">Segundo operando tipo <see cref="Numero"/>.</param>
-        /// <param name="operador">Operador tipo <see cref="string"/>.</param>
+        /// <param name="operador">Operador tipo <see cref="char"/>.</param>
         /// <returns>Resultado de la operación realizada tipo <see cref="double"/>.</returns>
-        public static double Operar(Numero num1, Numero num2, string operador)
+        public static double Operar(Numero num1, Numero num2, char operador)
         {
-            switch(ValidarOperador(char.Parse(operador)))
+            switch(ValidarOperador(operador))
             {
-                case "+":
-                    return num1 + num2;
+                case "*":
+                    return num1 * num2;
 
                 case "-":
                     return num1 - num2;
@@ -29,7 +29,7 @@ namespace Entidades
                     return num1 / num2;
 
                 default:
-                    return num1 * num2;
+                    return num1 + num2;
             }
         }
 

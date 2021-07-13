@@ -14,10 +14,9 @@ namespace Entidades
         /// <summary>
         /// Constructor por defecto, setea el atributo en 0
         /// </summary>
-        public Numero()
-        {
-            this.numero = 0;
-        }
+        public Numero() : this(0)
+        { }
+
         /// <summary>
         /// Contructor con parametro, setea el atributo con el parametro obtenido
         /// </summary>
@@ -26,6 +25,7 @@ namespace Entidades
         {
             this.numero = numero;
         }
+
         /// <summary>
         /// Contructor con parametro, setea el atributo con el parametro obtenido
         /// </summary>
@@ -36,6 +36,20 @@ namespace Entidades
         }
         #endregion
 
+        #region Propiedad
+        /// <summary>
+        /// Valida y setea un número en el atributo "numero".
+        /// </summary>
+        private string SetNumero
+        {
+            set
+            {
+                this.numero = this.ValidarNumero(value);
+            }
+        }
+        #endregion
+
+        #region Validaciones
         /// <summary>
         /// Valida que el parámetro recibido sea un número.
         /// </summary>
@@ -45,27 +59,12 @@ namespace Entidades
         private double ValidarNumero(string strNumero)
         {
             double numero;
-            
-            if(double.TryParse(strNumero, out numero)) //Intenta parsear el string a double
-            {
-                return numero;
-            }
-            else
-            {
-                return 0;
-            }
+
+            double.TryParse(strNumero, out numero); //Intenta parsear el string a double
+
+            return numero;
         }
 
-        /// <summary>
-        /// Valida y setea un número en el atributo "numero".
-        /// </summary>
-        public string SetNumero
-        {
-            set
-            {
-                this.numero = ValidarNumero(value);
-            }
-        }
 
         /// <summary>
         /// Valida que el parámetro obtenido esté compuesto solamente por '0' y '1'.
@@ -94,6 +93,8 @@ namespace Entidades
             }
         }
 
+        #endregion
+
         #region Converter
         /// <summary>
         /// Valida y convierte el número binario recibido por parámetro a decimal.
@@ -103,7 +104,7 @@ namespace Entidades
         ///          Caso contrario: Retorna "Valor inválido."</returns>
         public string BinarioDecimal(string binario)
         {
-            if(EsBinario(binario))  //Verifica que el parametro sea binario
+            if(this.EsBinario(binario))  //Verifica que el parametro sea binario
             {
                 return (Convert.ToInt32(binario, 2)).ToString();    //Lo convierte a decimal y lo transforma a string
             }
@@ -122,7 +123,7 @@ namespace Entidades
         {
             string numeroString = numero.ToString();    //Convierte el número a string
 
-            return DecimalBinario(numeroString);    //Llama al método con parametro string y lo convierte
+            return this.DecimalBinario(numeroString);    //Llama al método con parametro string y lo convierte
         }
         /// <summary>
         /// Convierte el número decimal recibido por parámetro a binario.
